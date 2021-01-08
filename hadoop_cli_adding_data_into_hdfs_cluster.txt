@@ -1,0 +1,39 @@
+[maria_dev@sandbox-hdp ~]$ hadoop fs -ls
+Found 1 items
+drwxr-xr-x   - maria_dev hdfs          0 2021-01-07 20:21 hive
+[maria_dev@sandbox-hdp ~]$ hadoop fs -mkdir ml-100k
+[maria_dev@sandbox-hdp ~]$ hadoop fs -ls
+Found 2 items
+drwxr-xr-x   - maria_dev hdfs          0 2021-01-07 20:21 hive
+drwxr-xr-x   - maria_dev hdfs          0 2021-01-08 14:28 ml-100k
+[maria_dev@sandbox-hdp ~]$ wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
+--2021-01-08 14:30:06--  http://media.sundog-soft.com/hadoop/ml-100k/u.data
+Resolving media.sundog-soft.com (media.sundog-soft.com)... 52.217.13.204
+Connecting to media.sundog-soft.com (media.sundog-soft.com)|52.217.13.204|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2079229 (2.0M) [application/octet-stream]
+Saving to: ‘u.data’
+
+100%[===================================================================================================================>] 2,079,229   1.71MB/s   in 1.2s
+
+2021-01-08 14:30:08 (1.71 MB/s) - ‘u.data’ saved [2079229/2079229]
+
+[maria_dev@sandbox-hdp ~]$ ls
+u.data
+[maria_dev@sandbox-hdp ~]$ hadoop fs -copyFromLocal u.data ml-100k/u.data
+[maria_dev@sandbox-hdp ~]$ hadoop fs -ls
+Found 2 items
+drwxr-xr-x   - maria_dev hdfs          0 2021-01-07 20:21 hive
+drwxr-xr-x   - maria_dev hdfs          0 2021-01-08 14:30 ml-100k
+[maria_dev@sandbox-hdp ~]$ hadoop fs -ls ml-100k
+Found 1 items
+-rw-r--r--   1 maria_dev hdfs    2079229 2021-01-08 14:30 ml-100k/u.data
+[maria_dev@sandbox-hdp ~]$ hadoop fs -rm ml-100k/u.data
+21/01/08 14:31:28 INFO fs.TrashPolicyDefault: Moved: 'hdfs://sandbox-hdp.hortonworks.com:8020/user/maria_dev/ml-100k/u.data' to trash at: hdfs://sandbox-hdp.hortonworks.com:8020/user/maria_dev/.Trash/Current/user/maria_dev/ml-100k/u.data
+[maria_dev@sandbox-hdp ~]$ hadoop fs -ls ml-100k
+[maria_dev@sandbox-hdp ~]$ hadoop fs -rmdir ml-100k
+[maria_dev@sandbox-hdp ~]$ hadoop fs -ls
+Found 2 items
+drwx------   - maria_dev hdfs          0 2021-01-08 14:31 .Trash
+drwxr-xr-x   - maria_dev hdfs          0 2021-01-07 20:21 hive
+[maria_dev@sandbox-hdp ~]$
