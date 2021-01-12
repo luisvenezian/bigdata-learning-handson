@@ -16,4 +16,3 @@ fiveStarWithData = JOIN fiveStarMovies BY movieID, nameLookup BY movieID;
 oldestFiveStarMovies = ORDER fiveStarWithData BY nameLookup::releaseTime;
 
 DUMP oldestFiveStarMovies;
-~
