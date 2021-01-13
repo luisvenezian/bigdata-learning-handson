@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Reduce to (movieID, (sumOfRatings, totalRatings))
     ratingTotalsAndCount = movieRatings.reduceByKey(lambda prev_val, next_val: ( prev_val[0] + next_val[0], prev_val[1] + next_val[1] ) )
 
-    ratingTotalsAndCountGreaterThanTen = ratingTotalsAndCount.filter(lambda x: True if x[1][0] > 10 else False) # x[1][0] is TotalRatings
+    ratingTotalsAndCountGreaterThanTen = ratingTotalsAndCount.filter(lambda x: True if x[1][1] > 10 else False) # x[1][1] is TotalRatings
 
     # Map to (rating, averageRating)
     averageRatings = ratingTotalsAndCountGreaterThanTen.mapValues(lambda row : row[0] / row[1]) # where position 0 is SumOfrating column and 1 is totalCount
