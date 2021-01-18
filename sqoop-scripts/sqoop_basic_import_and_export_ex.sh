@@ -1,6 +1,6 @@
 # Importing from MySQL to Hive 
 sqoop import --connect jdbc:mysql://localhost/movielens --username root -P --driver com.mysql.jdbc.Driver --table movies -m 1 --hive-import
-# We also could use --password parameter to avoid input the password after submit our command
+# We also could use --password parameter instead -P (which is not recommended and will trigger a warning but...) to avoid input the password after submit our command
 # This way:
 sqoop import --connect jdbc:mysql://localhost/movielens --username root --password devesh --driver com.mysql.jdbc.Driver --table movies -m 1 --hive-import
 
